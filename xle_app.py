@@ -44,6 +44,13 @@ root.config(menu=menubar)
 
 xle_view = xle_view(root)
 
+if platform.system() == "Windows":
+    def on_close():
+        xle.kill()
+        root.destroy()
+    
+    root.protocol("WM_DELETE_WINDOW", lambda: on_close())
+
 root.mainloop()
 
 
