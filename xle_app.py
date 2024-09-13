@@ -34,8 +34,8 @@ xle = xle_model()
 
 root = tk.Tk()
 root.title("XLE API")
-root.geometry("500x612")
-root.configure(background="systemWindowBackgroundColor")
+root.geometry("500x650")
+#root.configure(background="systemWindowBackgroundColor")
 #print(root.config()["background"])
 
 menubar = Menubar(root)
