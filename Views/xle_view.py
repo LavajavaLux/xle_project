@@ -386,7 +386,8 @@ class Test_window:
             error_file = self.xle.test_file_path + ".errors"
             open_errors = open(error_file, "r").read()
 
-            error_label = tk.Text(testWindow, width=30, background="systemWindowBackgroundColor")
+            background = "systemWindowBackgroundColor" if self.xle.get_os_type() != "Windows" else "white"
+            error_label = tk.Text(testWindow, width=30, background=background)
             error_label.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)
 
             error_label.insert(tk.END, "Error: \n" + open_errors)
