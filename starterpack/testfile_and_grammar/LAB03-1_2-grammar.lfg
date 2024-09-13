@@ -1,0 +1,79 @@
+LAB03 ENGLISH CONFIG (1.0)
+ROOTCAT S.
+LEXENTRIES (LAB03 ENGLISH).
+RULES (LAB03 ENGLISH).
+GOVERNABLERELATIONS SUBJ OBJ.
+----
+
+LAB03 ENGLISH RULES (1.0)
+S   --> { NP: (^SUBJ)=!; VP: ^=!; }.
+NP  --> { DET: ^=!; (ADV*: ! $ (^ADJUNCT);) (ADJ*: ! $ (^ADJUNCT);) N: ^=!; | NAME | NP: ^=!; CONJ NP: ^=!; }.
+VP  --> { (ADV*: ! $ (^ADJUNCT);) V: ^=!; (NP: (^OBJtheta)=!; NP: (^OBJ)=!;) | V: ^=!; (NP: (^OBJtheta)=!; NP: (^OBJ)=!;) (ADV*: ! $ (^ADJUNCT);) | V: ^=!; SCOMP: ^=! | (ADV*: ! $ (^ADJUNCT);) V: ^=!; (NP: (^OBJ)=!;) | V: ^=! ; (NP: (^OBJ)=!;) (ADV*: ! $ (^ADJUNCT);)}.
+PP  --> { P NP | NP PP | P PP }.
+ADVP  --> { ADV: ^=!; (ADVP: ^=!;) | ADVP: ^=!; CONJ ADVP: ^=!; }.
+AUXP  --> { AUX ADJ }.
+ADJP  --> { ADJ: ^=!; (ADJP: ^=!;) | ADJP: ^=!; CONJ ADJP: ^=!; }.
+SCOMP --> { C: ^=!; S: (^COMP)=! }.
+----
+
+LAB03 ENGLISH LEXICON (1.0)
+this    DET * (^SPEC)=def (^NUM)=sg.
+these   DET * (^SPEC)=def (^NUM)=pl.
+that    DET * (^SPEC)=def (^NUM)=sg.
+those   DET * (^SPEC)=def (^NUM)=pl.
+the     DET * (^SPEC)=def.
+a       DET * (^SPEC)=def (^NUM)=sg.
+
+that    C * (^COMP-FORM)=that.
+----
+
+LAB03 ENGLISH LEXICON (1.0)
+spy      N * (^PRED)='spy' (^NUM)=sg.
+spies    N * (^PRED)='spy' (^NUM)=pl.
+captain  N * (^PRED)='captain' (^NUM)=sg. 
+captains N * (^PRED)='captain' (^NUM)=pl. 
+pirate   N * (^PRED)='pirate' (^NUM)=sg. 
+pirates  N * (^PRED)='pirate' (^NUM)=pl. 
+pumpkin  N * (^PRED)='pumpkin' (^NUM)=sg. 
+pumpkins  N * (^PRED)='pumpkin' (^NUM)=pl. 
+
+cook     N * (^PRED)='cook' (^NUM)=sg. 
+cooks    N * (^PRED)='cook' (^NUM)=pl. 
+book     N * (^PRED)='book' (^NUM)=sg. 
+books    N * (^PRED)='book' (^NUM)=pl. 
+----
+
+LAB03 ENGLISH LEXICON (1.0)
+yawn     V * (^PRED)='yawn<(^SUBJ)>'.
+yawns    V * (^PRED)='yawn<(^SUBJ)>' (^SUBJ NUM)=sg.
+shock    V * (^PRED)='shock<(^SUBJ) (^OBJ)>'.
+shocks   V * (^PRED)='shock<(^SUBJ) (^OBJ)>' (^SUBJ NUM)=sg.
+devour   V * (^PRED)='devour<(^SUBJ) (^OBJ)>'.
+devours  V * (^PRED)='devour<(^SUBJ) (^OBJ)>' (^SUBJ NUM)=sg.
+
+see      V * (^PRED)='see<(^SUBJ) (^OBJ)>'.
+sees     V * (^PRED)='see<(^SUBJ) (^OBJ)>' (^SUBJ NUM)=sg.
+say      V * (^PRED)='say<(^SUBJ) (^OBJ)>'.
+says     V * (^PRED)='say<(^SUBJ) (^OBJ)>' (^SUBJ NUM)=sg.
+sing     V * (^PRED)='sing<(^SUBJ)>'.
+sings    V * (^PRED)='sing<(^SUBJ)>' (^SUBJ NUM)=sg.
+shout    V * (^PRED)='shout<(^SUBJ)>'.
+shouts   V * (^PRED)='shout<(^SUBJ)>' (^SUBJ NUM)=sg.
+
+give     V * (^PRED)='give<(^SUBJ) (^OBJtheta) (^OBJ)>'.
+gives    V * (^PRED)='give<(^SUBJ) (^OBJtheta) (^OBJ)>' (^SUBJ NUM)=sg.
+tell     V * (^PRED)='tell<(^SUBJ) (^OBJtheta) (^OBJ)>'.
+tells    V * (^PRED)='tell<(^SUBJ) (^OBJtheta) (^OBJ)>' (^SUBJ NUM)=sg.
+----
+
+
+LAB03 ENGLISH LEXICON (1.0)
+nasty     ADJ * (^PRED)='nasty'.
+old       ADJ * (^PRED)='old'.
+drunk     ADJ * (^PRED)='drunk'.
+
+angrily   ADV * (^PRED)='angrily'.
+
+very      ADV * (^PRED)='very'.
+----
+

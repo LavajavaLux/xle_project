@@ -1,0 +1,113 @@
+the awesome aardvark shouts (1 0 0 0)
+
+the subsymbolic neural network surprised the hilarious nerd (1 0 0 0)
+
+Sue shouts rarely (1 0 0 0)
+
+Sue shouts superstitiously (1 0 0 0)
+
+normally the gorilla shouts aloud (1 0 0 0)
+
+Samantha sees Paula (1 0 0 0)
+
+Greg shouts in Stuttgart (1 0 0 0)
+
+Rudy gives Coke to Cupid (3 0 0 0)
+
+a girl walks  (1 0 0 0)
+
+the girls walk  (1 0 0 0)
+
+the sheep walks  (1 0 0 0)
+
+the sheep walk  (1 0 0 0)
+
+I walk  (1 0 0 0)
+
+I walked  (1 0 0 0)
+
+I am walking  (1 0 0 0)
+
+I have walked  (1 0 0 0)
+
+the knife cuts the rope  (1 0 0 0)
+
+the knife cut the rope  (1 0 0 0)
+
+the knife has cut the rope  (1 0 0 0)
+
+the monkey ate a banana  (1 0 0 0)
+
+the captain sees a pirate  (1 0 0 0)
+
+the girl is eating a hazelnut  (1 0 0 0)
+
+the girl has eaten a hazelnut  (1 0 0 0)
+
+Maria reads a novel  (1 0 0 0)
+
+the student read a magazine  (1 0 0 0)
+
+the students read a novel  (2 0 0 0)
+
+the student is reading a paper  (1 0 0 0)
+
+#john has read a magazine. john lowercased is interpreted as Noun by the analyzer
+
+John has read a magazine  (2 0 0 0)
+
+the boy saw the girl  (1 0 0 0)
+
+the mice ate a hazelnut  (1 0 0 0)
+
+you planned a trip  (2 0 0 0)
+
+he is planning a party  (1 0 0 0)
+
+
+
+I is walking (0! 0 0 0)
+
+she am walking (0! 0 0 0)
+
+she walking (0! 0 0 0)
+
+she has walking (0! 0 0 0)
+
+the girl am walking (0! 0 0 0)
+
+the student have walked (0! 0 0 0)
+
+I has walked (0! 0 0 0)
+
+the captain see a pirate (0! 0 0 0)
+
+
+the success surprised Jane Austen  (1 0 0 0)
+
+George Bernard Shaw wrote a book  (1 0 0 0)
+
+Edgar Alan Poe expected the baboon to shout  (1 0 0 0)
+
+Father Christmas saw Rudolph Donner  (1 0 0 0)
+
+Professor Noam Chomsky wrote a book  (1 0 0 0)
+
+Pope Francis met Greta Thunberg  (1 0 0 0)
+
+Johann Wolfgang von Goethe wrote a book  (1 0 0 0)
+
+#testing common noun adjuncts
+
+a banana boat swims (1 0 0 0)
+
+lion Leo walks in the zoo (1 0 0 0)
+
+
+
+hello(1! 1 0 0)
+
+
+the pirate and the elephant(1! 1 0 0)
+
+Enter sentence here(1! 1 0 0)

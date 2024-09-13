@@ -1,0 +1,339 @@
+SMALL ENGLISH CONFIG (1.0)
+  ROOTCAT    S.
+  LEXENTRIES (SMALL ENGLISH).
+  RULES (SMALL ENGLISH).
+  TEMPLATES (SMALL ENGLISH).
+  GOVERNABLERELATIONS SUBJ OBJ OBL OBJ2 COMP XCOMP PREDLINK.	
+FILES C:/Users/Lukas/Downloads/xle-windows-2010-11-04/english-morph/english-std-morphconfig-with-paths.
+MORPHOLOGY (STANDARD ENGLISH).
+----
+
+SMALL ENGLISH RULES (1.0)
+
+   S  -->{ (ADVP: @ADJUNCT;) NP: (^ SUBJ)=! (!CASE)=nom		
+         | CP: (^ COMP)=! (!COMP-FORM) }
+           VP: ^=! (!VFORM) =c fin.			
+
+   VP --> 
+     (INF-PART: (^ VFORM) =c inf;)	
+      (AUX)
+      (ADVP: @ADJUNCT;)
+			V:  ^=!; 
+          (NP: { (^ OBJ) =! | (^ PREDLINK)=! } (!CASE)=acc;
+          (NP: (^ OBJ2)=! (!CASE)=acc;))
+       { ADVP: @ADJUNCT;
+       |   PP: { (^ OBL)=!
+               | @ADJUNCT 
+                 (!PTYPE)=sem}; }*
+          (VP: (^ XCOMP)=!;)					
+          (CP: (^ COMP)=!).
+
+   NP --> { { DET: ^=!; | e: { (^ NUM) =c pl (^ MASS-NOUN)=- | (! NSEM NCLASS)=c proper (^ MASS-NOUN)=- | (! NSEM NCLASS)~=proper (^ MASS-NOUN)=+ } }
+            [ADJP: @ADJUNCT;]* 
+            
+             N*: @ADJUNCT (! NSEM NCLASS)~=proper;
+             N: ^=! (^  PERS)=3;
+             N*: ! $ (^NAME-MOD) (^ NSEM NCLASS)=c proper;
+
+           [PP: @ADJUNCT (!PTYPE)=sem]*
+           | PRON: ^=!; }.
+
+   PP -->  P:   ^=!; 
+           NP:  { (^ PTYPE)=sem
+                  (^ OBJ)=!
+                | (^ PTYPE)=nosem
+                  ^=! }
+                (!CASE)=acc.
+
+   ADVP --> Adv: @ADJUNCT; (ADVP: ^=!).
+
+  ADJP --> ADVP*: @ADJUNCT; Adj: ^=!.
+
+   CP --> (C:	^=!;)
+	  S:	^=!.
+
+  "* * * * *"
+  "sublexical rules"
+
+   N --> N-S_BASE: ^=!;
+         N-T_BASE: ^=!;
+         N-F_BASE*: ^=!;
+        (GEND-F_BASE: ^=! ;)
+         (Num-F_BASE: ^=!;)
+         (RAISED_BASE: ^=!;)
+         GUESSED_BASE*: ^=!.
+  
+  V --> V-S_BASE: ^=!;
+        V-T_BASE: ^=!;
+        V-F_BASE*: ^=!;
+        (Num-F_BASE*: ^=!;)
+        (GUESSED_BASE: ^=!).
+
+  AUX --> AUX-S_BASE: ^=!;
+        AUX-T_BASE: ^=!;
+        AUX-F_BASE*: ^=!;
+        (Num-F_BASE*: (^SUBJ)=!;) "* because of you are and they are"
+        GUESSED_BASE*: ^=!.
+
+   Adj --> Adj-S_BASE: ^=!;
+        Adj-T_BASE: ^=!;
+	  (Comp-F_BASE)
+    GUESSED_BASE*: ^=!.
+
+   Adv --> Adv-S_BASE: ^=!;
+        Adv-T_BASE: ^=!;
+	  (Comp-F_BASE)
+    GUESSED_BASE*: ^=!.
+
+  PRON --> Pron-S_BASE: ^=!;
+          IGNORE_BASE*
+        Pron-T_BASE: ^=!;
+        Pron-F_BASE*: ^=!;
+        (Num-F_BASE*: ^=!;) "* because of: you are and they are"
+        GUESSED_BASE*: ^=!.
+----
+
+SMALL ENGLISH LEXICON (1.0)
+
+a		DET	*	(^ SPEC)=indef (^ NUM)=sg.
+the		DET	*	(^ SPEC)=def.
+
+that	C	*	(^ COMP-FORM)=that.
+
+she		PRON *	(^ PRED)='pro'	(^ NUM)=sg	(^ PERS)=3	(^ CASE)=nom (^ GEND)=fem.
+her		PRON *	(^ PRED)='pro'	(^ NUM)=sg	(^ PERS)=3	(^ CASE)=acc (^ GEND)=fem.
+he		PRON *	(^ PRED)='pro'	(^ NUM)=sg	(^ PERS)=3	(^ CASE)=nom	(^ GEND)=masc.
+him		PRON *	(^ PRED)='pro'	(^ NUM)=sg	(^ PERS)=3	(^ CASE)=acc	(^ GEND)=masc.
+
+it		PRON *	{ (^ PRED)='pro' | (^ PRON-TYPE)=expl (^ PRON-FORM)=it }	(^ NUM)=sg	(^ PERS)=3	{(^ CASE)=nom | (^ CASE)=acc}	(^ GEND)=neut.
+there	PRON *	(^ PRON-TYPE)=expl	(^ PRON-FORM)=there.
+
+to		INF-PART	*	;
+		P	*	{ (^ PRED)='to<(^ OBJ)>' (^ PTYPE)=sem
+				| (^ PTYPE)=nosem (^ PCASE)=to }.
+at		P    * { (^ PRED)='at<(^ OBJ)>' (^ PTYPE)=sem
+                 | (^ PTYPE)=nosem (^ PCASE)=at }.
+in		P    * { (^ PRED)='in<(^ OBJ)>' (^ PTYPE)=sem
+                 | (^ PTYPE)=nosem (^ PCASE)=in }.
+on		P	*	{ (^ PRED)='on<(^ OBJ)>' (^ PTYPE)=sem
+				| (^ PTYPE)=nosem (^ PCASE)=on }.
+von  P * (^ PRED)='von<(^ OBJ)>' (^LANG)=ger (^NOBILITY)=+.
+
+
+fight	V	*	@(V-INTRANSITIVE fight) @V-PRESENT-NON-THIRD-PERS-SG.
+flee	V	*	@(V-INTRANSITIVE flee) @V-PRESENT-NON-THIRD-PERS-SG.
+sing	V	*	@(V-INTRANSITIVE sing) @V-PRESENT-NON-THIRD-PERS-SG.
+sinks	V	*	@(V-INTRANSITIVE sink) @V-PRESENT-THIRD-PERS-SG.
+shout	V	*	@(V-INTRANSITIVE shout) @V-PRESENT-NON-THIRD-PERS-SG.
+shouts	V	*	@(V-INTRANSITIVE shout) @V-PRESENT-THIRD-PERS-SG.
+came	V	*	@(V-INTRANSITIVE come) @V-PAST-TENSE.
+
+"
+see		V	*	@(V-TRANSITIVE see) @V-PRESENT-NON-THIRD-PERS-SG.
+sees	V	*	@(V-TRANSITIVE see) @V-PRESENT-THIRD-PERS-SG.
+"
+
+laughs	V	*	@(V-NOSEM-OBL laugh at) @V-PRESENT-THIRD-PERS-SG.
+gives	V	*	{ @(V-DITRANSITIVE give) | @(V-OBJ-NOSEM-OBL give to) } @V-PRESENT-THIRD-PERS-SG.
+
+pours	V	*	@(V-EXPLSUBJ pour it) @V-PRESENT-THIRD-PERS-SG.
+rain	V	*	@(V-EXPLSUBJ rain it) @V-PRESENT-NON-THIRD-PERS-SG.
+rains	V	*	@(V-EXPLSUBJ rain it) @V-PRESENT-THIRD-PERS-SG.
+snow	V	*	@(V-EXPLSUBJ snow it) @V-PRESENT-NON-THIRD-PERS-SG.
+
+surprise V	*	@(V-EXPLSUBJ-OBJ-COMP surprise it) @V-PRESENT-NON-THIRD-PERS-SG.
+surprised V	*		@(V-TRANSITIVE surprise_it) @V-PAST-TENSE.
+
+
+is		V	*	@(V-SUBJ-PRED be) @V-PRESENT-THIRD-PERS-SG;
+		V	*	@(V-EXPLSUBJ-PRED be there) (^ PREDLINK NUM)=sg (^ VFORM)=fin (^ TENSE)=present.
+are		V	*	@(V-SUBJ-PRED be) @V-PRESENT-NON-THIRD-PERS-SG;
+		V	*	@(V-EXPLSUBJ-PRED be there) (^ PREDLINK NUM)=pl (^ VFORM)=fin (^ TENSE)=present.
+be		V	*	@(V-SUBJ-PRED be) @V-INFINITIVE;
+		V	*	@(V-EXPLSUBJ-PRED be there) @V-INFINITIVE.
+
+seemed		V	*	@(V-SUBJRAIS seem) @V-PAST-TENSE.
+tried		V	*	@(V-SUBJEQUI try) @V-PAST-TENSE.
+expected	V	*	@(V-OBJRAIS expect) @V-PAST-TENSE.
+expect		V	*	@(V-OBJRAIS expect) @V-PRESENT-NON-THIRD-PERS-SG.
+persuaded	V	*	@(V-OBJEQUI persuade) @V-PAST-TENSE.
+persuade	V	*	@(V-OBJEQUI persuade) @V-PRESENT-NON-THIRD-PERS-SG.
+
+
+"........................................................"
+                 "sublexical entries"
+"........................................................"
+
+"................-Unknown_Base..........................."
+"................-S for stems............................"
+-unknown  N-S XLE (^ PRED)='%stem'; "What is the difference between -unknown and -Lunknown funktioniert beides?"
+          Adj-S XLE (^ PRED)='%stem';
+          Adv-S XLE (^ PRED)='%stem';
+          Pron-S XLE (^ PRED)='%stem';
+          V-S XLE { @(V-INTRANSITIVE %stem)| @(V-TRANSITIVE %stem) };
+          AUX-S XLE (^AUXILIARY)=%stem (^VFORM)=fin.
+
+-Unknown  N-S XLE (^ PRED)='%stem';
+          Adj-S XLE (^ PRED)='%stem';
+          Adv-S XLE (^ PRED)='%stem';
+          Pron-S XLE (^ PRED)='%stem';
+          V-S XLE { @(V-INTRANSITIVE %stem)| @(V-TRANSITIVE %stem) };
+          AUX-S XLE (^AUXILIARY)=%stem. 
+ 
+
+
+".................-T for tag............................."
++Adj  Adj-T XLE .
++Adv  Adv-T XLE .
++Noun           N-T     XLE    (^ NSEM NCLASS)=common.
++Prop        N-T     XLE     (^ NSEM NCLASS)=proper (^ NSEM PROPER PROPER-TYPE)=name (^ NUM)=sg (^ PERS)=3.
++Verb          V-T     XLE .
++Pron         Pron-T  XLE ~(^SPEC).
++Aux           AUX-T   XLE {(^PROG)=c + (^TENSE)= present | ~(^PROG) (^TENSE)= past} .
+
+".................-F for feature........................."
++Sg             Num-F   XLE (^ NUM)=sg.
++Pl             Num-F   XLE (^ NUM)=pl.
++SP             Num-F   XLE { (^ NUM)=pl | (^ NUM)=sg }.	
++Comp		        Comp-F	XLE	(^ DEGREE)=comp.
++Sup		        Comp-F	XLE	(^ DEGREE)=sup.
++Giv            N-F     XLE (^ NSEM PROPER NAME-TYPE)=first_name (^NUM)=sg.
++Fam            N-F     XLE (^ NSEM PROPER NAME-TYPE)=last_name.
++Masc           GEND-F	XLE	(^ GEND)=masc.
++Fem            N-F	    XLE	(^ GEND)=fem.
++Neut           N-F	    xle	(^ GEND)=neut.
++Count          N-F     XLE (^ NSEM NCLASS) = count.
++Place          N-F     XLE (^ NSEM PROPER NAME-TYPE) = place.
++City           N-F     XLE (^ NSEM PROPER PLACE-TYPE) = city.
++Misc           N-F     XLE (^ NSEM PROPER NAME-TYPE) = misc.
++Person         N-F     XLE (^ NSEM PROPER NAME-TYPE) = person.
++Pres          V-F XLE (^ TENSE)=present;
+               AUX-F XLE .
++Past          V-F XLE (^ TENSE)=past;
+               AUX-F XLE (^ TENSE)=past.
++Future        AUX-F XLE (^ TENSE)=future.
+
++1sg           V-F XLE (^SUBJ PERS)=1 (^SUBJ NUM)=sg (^VFORM)=fin;
+                AUX-F XLE (^SUBJ PERS)=c 1.
++2sg           V-F XLE (^SUBJ PERS)=2 (^SUBJ NUM)=sg (^VFORM)=fin;
+                AUX-F XLE (^SUBJ PERS)=c 2.
++3sg           V-F XLE (^SUBJ PERS)=3 (^SUBJ NUM)=sg (^VFORM)=fin;
+                AUX-F XLE (^SUBJ PERS)=c 3.
++1pl           V-F XLE (^SUBJ PERS)=1 (^SUBJ NUM)=pl (^VFORM)=fin;
+                AUX-F XLE.
++2pl           V-F XLE (^SUBJ PERS)=2 (^SUBJ NUM)=pl (^VFORM)=fin;
+                AUX-F XLE .
++3pl           V-F XLE (^SUBJ PERS)=3 (^SUBJ NUM)=pl (^VFORM)=fin;
+                AUX-F XLE.
++Non3sg        V-F XLE @V-PRESENT-NON-THIRD-PERS-SG;
+                AUX-F XLE (^SUBJ PERS)~=3.
+
++1P           Pron-F XLE (^ PERS)=1 .
++2P           Pron-F XLE (^ PERS)=2 .
++3P           Pron-F XLE (^ PERS)=3 .
++Pers        Pron-F XLE (^ PRON-TYPE)=pers.
++Nom        Pron-F XLE (^ CASE)=nom.
++NomAcc     Pron-F XLE { (^ CASE)=nom | (^ CASE)=acc }.
++PastPart      V-F XLE @V-PAST-TENSE.
++PastPerf   V-F XLE @V-PAST-TENSE.
++PastTense     V-F XLE @V-PAST-TENSE (^VFORM)=fin;
+              AUX-F XLE @V-PAST-TENSE.
++PastBoth      V-F XLE @V-PAST-TENSE.
++PresPart      V-F XLE (^TENSE)=present.
++123SP       V-F XLE (^VFORM)=fin;
+                AUX-F XLE (^VFORM)=fin.
++Prog          V-F XLE  (^PROG)=+ (^ VFORM)=fin {(^AUXILIARY)=c be | (^AUXILIARY)=c was}.
++Title         N-F XLE (^ NCLASS)=title.
+
+".................Specials..............................."
++SafeRaised RAISED xle (^ LOWERCASE)=+.
++Guessed GUESSED xle (^ GUESS)=+.
+
+".................Verbs.................................."
+walk    V-S		XLE	@(V-INTRANSITIVE walk).
+walks   V-S		XLE	@(V-INTRANSITIVE walk).
+walked  V-S		XLE	@(V-INTRANSITIVE walk).
+walking V-S		XLE	@(V-INTRANSITIVE walk).
+be     AUX-S	XLE	(^AUXILIARY)=be.
+am     AUX-S  XLE	(^AUXILIARY)=be.
+are    AUX-S  XLE	(^AUXILIARY)=be.
+is     AUX-S  XLE	(^AUXILIARY)=be.
+was    AUX-S  XLE	(^AUXILIARY)=be.
+were   AUX-S  XLE	(^AUXILIARY)=be.
+been   AUX-S  XLE	(^AUXILIARY)=be.
+have   AUX-S  XLE	(^AUXILIARY)=have.
+has    AUX-S  XLE	(^AUXILIARY)=have.
+had    AUX-S  XLE	(^AUXILIARY)=have.
+cuts    V-S		@(V-TRANSITIVE cut) @V-PRESENT-THIRD-PERS-SG.
+cut    V-S		XLE	@(V-TRANSITIVE cut) {@V-PRESENT-THIRD-PERS-SG | @V-PAST-TENSE}.
+ate   V-S		XLE	@(V-TRANSITIVE eat) @V-PAST-TENSE.
+tiny		Adj-S	XLE	(^ PRED)='tiny'.
+strong		Adj-S	XLE	(^ PRED)='strong'.
+fresh		Adj-S	XLE	(^ PRED)='fresh'.
+gorilla         N-S     XLE     (^ PRED)='gorilla'.
+mouse		N-S	XLE	(^ PRED)='mouse'.
+elephant	N-S	XLE	(^ PRED)='elephant'.
+banana		N-S	XLE	(^ PRED)='banana'.
+sheep		N-S	XLE	(^ PRED)='sheep'.
+fish		N-S	XLE	(^ PRED)='fish'.
+pirate		N-S	XLE	(^ PRED)='pirate'.
+----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SMALL ENGLISH TEMPLATES (1.0)
+
+V-INTRANSITIVE(_PRED) = (^ PRED)='_PRED<(^ SUBJ)>'.
+V-TRANSITIVE(_PRED)   = (^ PRED)='_PRED<(^ SUBJ)(^ OBJ)>'.
+V-DITRANSITIVE(_PRED) = (^ PRED)='_PRED<(^ SUBJ)(^ OBJ2)(^ OBJ)>'.
+
+V-NOSEM-OBL(_PRED _PCASE) = (^ PRED)='_PRED<(^ SUBJ)(^ OBL)>'
+							(^ OBL PTYPE)=nosem
+							(^ OBL PCASE)=_PCASE.
+V-OBJ-NOSEM-OBL(_PRED _PCASE) = (^ PRED)='_PRED<(^ SUBJ)(^ OBJ)(^ OBL)>'
+								(^ OBL PTYPE)=nosem
+								(^ OBL PCASE)=_PCASE.
+
+V-EXPLSUBJ(_PRED _PRON-FORM)   = (^ PRED)='_PRED<>(^ SUBJ)' (^ SUBJ PRON-FORM) =c _PRON-FORM.
+V-EXPLSUBJ-OBJ-COMP(_PRED _PRON-FORM) = (^ PRED)='_PRED<(^ OBJ)(^ COMP)>(^ SUBJ)' (^ SUBJ PRON-FORM) =c _PRON-FORM.
+V-SUBJ-PRED(_PRED) = (^ PRED)='_PRED<(^ SUBJ)(^ PREDLINK)>'.
+V-EXPLSUBJ-PRED(_PRED _PRON-FORM) = (^ PRED)='_PRED<(^ PREDLINK)>(^ SUBJ)' (^ SUBJ PRON-FORM) =c _PRON-FORM.
+
+V-SUBJEQUI(_PRED)   = (^ PRED)='_PRED<(^ SUBJ)(^ XCOMP)>' (^ SUBJ)=(^ XCOMP SUBJ).
+V-SUBJRAIS(_PRED)   = (^ PRED)='_PRED<(^ XCOMP)>(^ SUBJ)' (^ SUBJ)=(^ XCOMP SUBJ).
+V-OBJEQUI(_PRED)    = (^ PRED)='_PRED<(^ SUBJ)(^ OBJ)(^ XCOMP)>' (^ OBJ)=(^ XCOMP SUBJ).
+V-OBJRAIS(_PRED)    = (^ PRED)='_PRED<(^ SUBJ)(^ XCOMP)>(^ OBJ)' (^ OBJ)=(^ XCOMP SUBJ).
+
+V-PRESENT-THIRD-PERS-SG  =	(^ SUBJ NUM)=c sg
+							(^ SUBJ PERS)=3
+							(^ VFORM)=fin
+							(^ TENSE)=present.
+V-PRESENT-NON-THIRD-PERS-SG = { {(^SUBJ NUM)=pl (^SUBJ PERS)=3 | (^SUBJ NUM)=sg (^SUBJ PERS)~=3 }
+								(^VFORM)=fin
+								(^TENSE)=c present
+							  | @V-INFINITIVE }.
+V-PAST-TENSE = (^ VFORM)=fin (^ TENSE)=past.
+V-INFINITIVE     = (^ VFORM)=inf.
+ADJUNCT = ! $ (^ ADJUNCT).
+----
