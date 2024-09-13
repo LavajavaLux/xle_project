@@ -20,6 +20,27 @@ class xle_model:
         self.current_dir = os.path.dirname(os.path.realpath(__file__))
         self.xle_path = "{}/xle.sh".format(os.path.dirname(self.current_dir)) # path to the xle.sh script
         self.xle_directory = self.config.getConfigurations("xle_path")
+        
+    def get_environment(self):
+        """
+        returns the environment the xle executable will be run in
+        """
+        if self.get_os_type() == "Windows":
+            #set XLEPATH=%1
+            #set Path=%Path%;%1\tcl\x32\bin;%1\iconv\x32\bin;%1\ms\x32\lib;%1\bin
+            env = os.environ.copy()
+            env['XLEPATH'] = self.xle_directory
+            env['PATH'] = f"{env['PATH']};{self.xle_directory}/tcl/x32/bin;{self.xle_directory}/iconv/x32/bin;{self.xle_directory}/ms/x32/lib;{self.xle_directory}/bin"
+            print(env['XLEPATH'])
+            print(env['PATH'])
+            return env
+        else:
+            env = os.environ.copy()
+            env['XLEPATH'] = self.xle_directory
+            env['PATH'] = f"{self.xle_directory}/bin:{env.get('PATH', '')}"
+            env['LD_LIBRARY_PATH'] = f"{self.xle_directory}/lib:{env.get('LD_LIBRARY_PATH', '')}"
+            env['DYLD_LIBRARY_PATH'] = f"{self.xle_directory}/lib:{env.get('DYLD_LIBRARY_PATH', '')}"
+            return env    
 
     def load_grammar(self, grammar_file_path):
         self.config.updateConfiguration("grammarfile", grammar_file_path)
@@ -75,11 +96,7 @@ class xle_model:
         command = [self.xle_path, self.xle_directory, "create-parser " + "\"{}\"".format(grammar) + "; parse-testfile " + "\"{}\"; exit;".format(testfile)]
         #command = "{}/xle.sh create-parser {}; parse-testfile {}".format(self.current_dir, grammar, testfile)
 
-        env = os.environ.copy()
-        env['XLEPATH'] = self.xle_directory
-        env['PATH'] = f"{self.xle_directory}/bin:{env.get('PATH', '')}"
-        env['LD_LIBRARY_PATH'] = f"{self.xle_directory}/lib:{env.get('LD_LIBRARY_PATH', '')}"
-        env['DYLD_LIBRARY_PATH'] = f"{self.xle_directory}/lib:{env.get('DYLD_LIBRARY_PATH', '')}"
+        env = self.get_environment()
 
         command = [
             'xle', '-e',
@@ -87,7 +104,8 @@ class xle_model:
         ]
 
         try:
-            subprocess.run(command, env=env, timeout=5)
+            shell = self.get_os_type() == "Windows"
+            subprocess.run(command, env=env, timeout=5, shell=shell)
 
             stats_file_path = "{}.stats".format(self.test_file_path)
             with open(stats_file_path, "r") as stats_file:
@@ -126,11 +144,7 @@ class xle_model:
         print("Geparster Satz: " + sentence)
 
 
-        env = os.environ.copy()  
-        env['XLEPATH'] = self.xle_directory
-        env['PATH'] = f"{self.xle_directory}/bin:{env.get('PATH', '')}"
-        env['LD_LIBRARY_PATH'] = f"{self.xle_directory}/lib:{env.get('LD_LIBRARY_PATH', '')}"
-        env['DYLD_LIBRARY_PATH'] = f"{self.xle_directory}/lib:{env.get('DYLD_LIBRARY_PATH', '')}"
+        env = self.get_environment()
 
         command = [
             'xle', '-e',
@@ -138,8 +152,9 @@ class xle_model:
         ]
 
         #result = subprocess.run(command, env=env)
+        shell = self.get_os_type() == "Windows"
         process = subprocess.Popen(
-            command, env=env,
+            command, env=env, shell=shell
         )
 
         if ("MORPHOLOGY" in self.grammar_file or "morphology" in self.grammar_file or "morphconfig" in self.grammar_file) and " " in self.xle_directory:
@@ -168,8 +183,10 @@ class xle_model:
         """
         if self.get_os_type() == "Windows":
             # command for windows
-            subprocess.Popen(["taskkill", "/F", "/IM", "xle.exe"])
+            #subprocess.Popen(["taskkill", "/F", "/IM", "xle.exe"])
+            subprocess.run(["taskkill", "/F", "/IM", "xle.exe"])
         else:
             # command for unix
-            subprocess.Popen(["killall", "xle"])
+            subprocess.run(["killall", "xle"])
+
 
