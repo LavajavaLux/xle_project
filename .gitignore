@@ -1,1 +1,3 @@
 xle_config.xml
+__pycache__/
+*.pyc

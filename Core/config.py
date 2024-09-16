@@ -1,5 +1,7 @@
-import xml.etree.ElementTree as ET
 import os
+import platform
+
+import xml.etree.ElementTree as ET
 
 class Configuration:
     """
@@ -7,7 +9,15 @@ class Configuration:
     """
     def __init__(self, conf_file = None):
         self.current_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-        self.conf_file = conf_file if conf_file is not None else "{}/xle_config.xml".format(self.current_dir)
+        
+        #self.conf_file = conf_file if conf_file is not None else "{}/xle_config.xml".format(self.current_dir)
+        if platform.system() == "Darwin":
+            self.conf_file = os.path.expanduser("~/Library/Application Support/xle_app/xle_config.xml")
+        elif platform.system() == "Windows":
+            self.conf_file = os.path.join(os.getenv("APPDATA"), "xle_app", "xle_config.xml")
+        else:
+            self.conf_file = os.path.expanduser("~/.xle_app/xle_config.xml")
+
 
     def getConfigurations(self, attribute):
         """
@@ -38,6 +48,8 @@ class Configuration:
             configFile = open(self.conf_file, "r")
             configFile.close()
         except FileNotFoundError:
+            os.makedirs(os.path.dirname(self.conf_file), exist_ok=True)  
+
             root = ET.Element("configurations")
 
             tree = ET.ElementTree(root)
