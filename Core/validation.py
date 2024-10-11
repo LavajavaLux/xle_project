@@ -8,7 +8,7 @@ class Validation:
     @staticmethod
     def validate_path(path):
         """
-        sanitizes the given string for usage in a shell command
+        validates the given string for usage in a shell command
 
         parameters:
         ------------
@@ -24,7 +24,7 @@ class Validation:
     @staticmethod
     def validate_sentence(sentence):
         """
-        sanitizes the given string for usage in a shell command
+        validates the given string for usage in a shell command
 
         parameters:
         ------------
